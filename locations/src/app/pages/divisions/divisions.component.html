@@ -1,0 +1,21 @@
+<widget-top-page title="Division Management" icon="bi-map">
+
+  <!-- Search Form -->
+  <app-division-search [categories]="categories" (onAdd)="addNew()" (onSearch)="search($event)" />
+
+  <!-- If No Result -->
+  <widget-no-data *ngIf="list.length == 0" name="Division" />
+
+  <!-- Result Grid -->
+  <div class="row row-cols-3 g-3">
+    <div *ngFor="let item of list" class="col">
+      <app-division-item [item]="item" (onEdit)="edit($event)" />
+    </div>
+  </div>
+
+  <!-- Edit Dialog -->
+  <widget-modal-dialog [title]="targetData?.id ? 'Edit Division' : 'Add New Division'" modalId="divisionEdit">
+    <app-division-edit (saveListener)="save($event)" [categories]="categories"  [formData]="targetData" />
+  </widget-modal-dialog>
+
+</widget-top-page>

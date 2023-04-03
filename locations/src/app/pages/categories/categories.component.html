@@ -1,0 +1,21 @@
+<widget-top-page title="Category Management" icon="bi-tags">
+
+  <div actions>
+    <a (click)="addNew()" class="btn btn-outline-primary">
+      <i class="bi bi-plus-lg me-1"></i> Add New
+    </a>
+  </div>
+
+  <div class="row row-cols-3 g-3 mt-2">
+    <div class="col" *ngFor="let item of list">
+      <app-category-item [item]="item" (onEdit)="edit(item)"></app-category-item>
+    </div>
+  </div>
+
+  <widget-no-data *ngIf="list.length == 0" name="Category"></widget-no-data>
+
+  <widget-modal-dialog modalId="categoryEdit" [title]="targetData?.id ? 'Edit Category' : 'Add New Category'">
+    <app-category-edit [formData]="targetData" (saveListener)="save($event)" />
+  </widget-modal-dialog>
+
+</widget-top-page>
